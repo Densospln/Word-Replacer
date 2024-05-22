@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Replacer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f9f9f9;
+    }
+    .container {
+      padding: 20px;
+      max-width: 320px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      position: relative;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: calc(100% - 12px);
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .settings {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+    .settings-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .language-selector {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+    .multi-word {
+      display: none;
+    }
+    .multi-word input[type="text"] {
+      margin-bottom: 10px;
+    }
+    .word-pair {
+      margin-bottom: 10px;
+    }
+    .action-icons {
+      display: flex;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .action-icons img {
+      width: 16px;
+      height: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="language-selector">
+      <select id="language-select">
+        <option value="pl">Polski</option>
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+      </select>
+    </div>
+    <div class="settings">
+      <img src="settings-icon.png" class="settings-icon" alt="Settings">
+    </div>
+    <h1 data-lang="title">Word Replacer</h1>
+    <div class="single-word">
+      <label for="original" data-lang="original-label">Edytowane słowo:</label>
+      <input type="text" id="original">
+      <label for="replacement" data-lang="replacement-label">Docelowe słowo:</label>
+      <input type="text" id="replacement">
+      <button id="save" data-lang="save-button">Zapisz</button>
+    </div>
+    <div class="multi-word">
+      <div id="word-pairs">
+        <div class="word-pair">
+          <label data-lang="original-label">Edytowane słowo:</label>
+          <input type="text" class="multi-original">
+          <label data-lang="replacement-label">Docelowe słowo:</label>
+          <input type="text" class="multi-replacement">
+        </div>
+      </div>
+      <button id="add-pair" data-lang="add-pair-button">Dodaj pole</button>
+      <button id="save-multiple" data-lang="save-all-button">Zapisz wszystkie</button>
+    </div>
+    <h2 data-lang="history-title">Aktywne zmienne:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th data-lang="original-column">Oryginał</th>
+          <th data-lang="replacement-column">Docelowe</th>
+          <th data-lang="action-column">Akcja</th>
+        </tr>
+      </thead>
+      <tbody id="history">
+      </tbody>
+    </table>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
